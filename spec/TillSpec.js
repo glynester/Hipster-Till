@@ -16,6 +16,18 @@ describe ("till",function(){
     expect(till.basket[0]).toEqual("Choc Mudcake");
   });
 
+  it ("should allow multiple items to be added to the basket", function(){
+    till.addItem("Choc Mudcake");
+    till.addItem("Choc Mudcake");
+    till.addItem("Chocolate Chip Muffin");
+    expect(till.basket[2]).toEqual("Chocolate Chip Muffin");
+  });
+
+  it ("should not allow a non-menu item to be added to the basket", function(){
+    till.addItem("Maccaroni Cheese");
+    expect(till.basket.length).toEqual(0);
+  });
+
 
 })
 

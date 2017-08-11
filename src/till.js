@@ -31,18 +31,12 @@ function Till(){
   this.totalTax = 0;
   this.totalOwed = 0;
 
+}
 
+Till.prototype.addItem = function(item){
+  if (!this.prices[item]) return false;
+  this.basket.push(item);
 }
 
 Till.prototype.do_search = function(){
-  // return $.ajax({
-  //     type: "GET",
-  //     // dataType: 'jsonp',
-  //     data :JSON.stringify(val),
-  //     url: "files/hipstercoffee.json",
-  //     // contentType: "application/json"
-  //     contentType: "application/json"
-  // })
-
-
 }

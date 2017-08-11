@@ -1,0 +1,24 @@
+body {
+  background-color: #F3DFC7;
+  font-family:MetricWeb,sans-serif;
+}
+	html {
+		font-family: FinancierDisplayWeb, sans-serif;
+	}
+	h1, input, select, button {
+		font-family: MetricWeb, serif;
+	}
+
+  button {
+  margin-bottom: 5px;
+  }
+
+  input[type="text"] {
+    padding: 0 4px 0 4px;
+    width: 35px;
+    margin-bottom: 15px;
+  }
+
+  #receipt {
+    background-color: white;
+  }
