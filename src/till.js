@@ -24,8 +24,9 @@ function Till(){
   this.discountTable = {};
   this.basket = [];
   this.receipt = [];
-  this.generalDiscount = 0;
-  this.generalDiscountAmt = 0;
+  this.taxPercent = 8.64;
+  this.genDiscAmt = 0;
+  this.discounts=[{general:5,muffin:10}]
   this.spendAmtBeforeDiscount = 0;
   this.spendAmtAfterDiscount = 0;     // Not yet used!
   this.totalTax = 0;
@@ -45,5 +46,21 @@ Till.prototype.calcBasicTotal = function(){
   this.spendAmtBeforeDiscount = Math.round(this.spendAmtBeforeDiscount*100)/100;
 }
 
-Till.prototype.do_search = function(){
+Till.prototype.createRectHeader = function(){
+  var header = createDateTime();
+  return header;
+}
+
+function createDateTime(){
+  var date = new Date();
+  function pad(s) { return (s < 10) ? '0' + s : s; };
+  let month = (date.getMonth() + 1);
+  let day = (date.getDate());
+  let year = (date.getFullYear());
+  var retDate = `${[pad(day),pad(month),year].join('/')}`;
+  // return retDate;
+  date.toTimeString();
+  date.toTimeString().split(' ');
+  var retTime=date.toTimeString ().split(' ')[0];
+  return retDate + " " + retTime
 }
