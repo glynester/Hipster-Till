@@ -38,5 +38,12 @@ Till.prototype.addItem = function(item){
   this.basket.push(item);
 }
 
+Till.prototype.calcBasicTotal = function(){
+  this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v]).reduce((tot,item)=>{
+    return tot + item;
+  });
+  this.spendAmtBeforeDiscount = Math.round(this.spendAmtBeforeDiscount*100)/100;
+}
+
 Till.prototype.do_search = function(){
 }

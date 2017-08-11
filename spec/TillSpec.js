@@ -28,6 +28,14 @@ describe ("till",function(){
     expect(till.basket.length).toEqual(0);
   });
 
+  it ("should calculate a basic total cost of items ordered", function(){
+    till.addItem("Cappucino");
+    till.addItem("Affogato");
+    till.addItem("Cortado");
+    till.calcBasicTotal();
+    expect(till.spendAmtBeforeDiscount).toEqual(23.2);
+  })
+
 
 })
 
