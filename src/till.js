@@ -23,13 +23,15 @@ function Till(){
   //++++++++++++++++++++++++++++++++++++++++
   this.discountTable = {};
   this.basket = [];
-  this.receipt = [];
+  // this.receipt = [];
   this.taxPercent = 8.64;
   this.genDiscAmt = 0;
   this.discounts={general:5,muffin:10}
   this.spendAmtBeforeDiscount = 0;
   this.totalTax = 0;
   this.totalOwed = 0;
+  this.cashTendered = 0;
+  this.changeOwed = 0;
   this.GENERALDISCOUNTTHRESHHOLD = 50;
   this.INVOICEITEMCHARLENGTH = 30;       // Sets the spacing of the individual invoice items.
 }
@@ -61,6 +63,16 @@ Till.prototype.calcTaxation = function(){
 Till.prototype.finalTotal = function(){
   this.totalOwed = parseFloat(this.spendAmtBeforeDiscount)-parseFloat(this.genDiscAmt);
   this.totalOwed = (this.totalOwed).toFixed(2);
+}
+
+Till.prototype.tenderCash = function(cash){
+  this.cashTendered = (cash).toFixed(2);
+}
+
+Till.prototype.calcCashOwed = function(cash){
+  console.log(parseFloat(this.totalOwed));
+  this.changeOwed = parseFloat(this.cashTendered)-parseFloat(this.totalOwed);
+  this.changeOwed = (this.changeOwed).toFixed(2);
 }
 
 Till.prototype.createRectHeader = function(){

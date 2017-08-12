@@ -66,6 +66,15 @@ describe ("till",function(){
     expect(till.totalOwed).toEqual("65.88");
   })
 
+  it ("should return the correct change for cash tendered",function(){
+    till.addItem("Cortado",3);
+    till.createRectHeader();
+    till.tenderCash(20.65);
+    till.calcCashOwed();
+    expect(till.cashTendered).toEqual("20.65");
+    expect(till.changeOwed).toEqual("7.00");
+  })
+
 
 })
 
