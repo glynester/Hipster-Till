@@ -32,8 +32,38 @@ describe ("till",function(){
     till.addItem("Cappucino",2);
     till.addItem("Affogato",2);
     till.addItem("Cortado",2);
-    till.calcBasicTotal();
-    expect(till.spendAmtBeforeDiscount).toEqual(46.4);
+    till.createRectHeader();
+    expect(till.spendAmtBeforeDiscount).toEqual("46.40");
+  })
+
+  it ("should not apply the general discount if total cost < £50", function(){
+    till.addItem("Cappucino",2);
+    till.addItem("Affogato",2);
+    till.addItem("Cortado",2);
+    till.createRectHeader();
+    expect(till.genDiscAmt).toEqual("0.00");
+  })
+
+  it ("should apply the general discount if total cost > £50", function(){
+    till.addItem("Cappucino",2);
+    till.addItem("Affogato",2);
+    till.addItem("Cortado",2);
+    till.addItem("Choc Mousse",3);
+    till.createRectHeader();
+    expect(till.genDiscAmt).toEqual("3.55");
+  })
+
+  it ("should apply the correct tax rate", function(){
+    till.addItem("Blueberry Muffin",4);
+    till.createRectHeader();
+    expect(till.totalTax).toEqual("1.40");
+  })
+
+  it ("should calculate the correct overall total", function(){
+    till.addItem("Tiramisu",4);
+    till.addItem("Cafe Latte",5);
+    till.createRectHeader();
+    expect(till.totalOwed).toEqual("65.88");
   })
 
 
