@@ -21,4 +21,9 @@ body {
 
   #receipt {
     background-color: white;
+    width: 240px;
+  }
+
+  #receipt img {
+    width: 230px;
   }

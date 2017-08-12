@@ -23,25 +23,19 @@ $(document).ready(function(){
   })
 
   function createRect(){
+    $('#receipt').css({'padding':'10px'});    // Need to set programmatically or receipt is visible.
+    $('#receipt').append($("<img>").attr("src","images/cup.png"));
     var recItems = till.createRectHeader();
-    console.log(recItems);
-    // recItems.forEach(v=>{
     for (var v in recItems){
-      // console.log(v);
       if (v=="purchs"){
         recItems[v].forEach(i=>{
-          // $('#receipt').append($("<p>").text(`${i[0]} ${i[1]} x £${(i[2]).toFixed(2)}`));
           $('#receipt').append($("<pre>").text(i));
         })
       } else {
-        $('#receipt').append($("<p>").text(`${recItems[v]}`));
+        $('#receipt').append($("<pre>").text(`${recItems[v]}`));
       }
     };
-    // $('#receipt').append($("<p>").text(`${till.createRectHeader()}`));
-    // $('#receipt').append($("<p>").text(`${till.shopName}`));
-    // $('#receipt').append($("<p>").text(`${till.address}`));
-    // $('#receipt').append($("<p>").text(`phone: ${till.phone}`));
-    // $('#receipt').append($("<p>").text(`${till.createPurchList()}`));
+    $('#receipt').append($("<img>").attr("src","images/thanks.png"));
   }
 
 });

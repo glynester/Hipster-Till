@@ -26,13 +26,12 @@ function Till(){
   this.receipt = [];
   this.taxPercent = 8.64;
   this.genDiscAmt = 0;
-  this.discounts=[{general:5,muffin:10}]
+  this.discounts={general:5,muffin:10}
   this.spendAmtBeforeDiscount = 0;
-  this.spendAmtAfterDiscount = 0;     // Not yet used!
+  // this.spendAmtAfterDiscount = 0;     // Not yet used!
   this.totalTax = 0;
   this.totalOwed = 0;
   this.INVOICEITEMCHARLENGTH = 30;       // Sets the spacing of the individual invoice items.
-
 }
 
 Till.prototype.addItem = function(item,number){
@@ -44,21 +43,45 @@ Till.prototype.calcBasicTotal = function(){
   this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v[0]]*v[1]).reduce((tot,item)=>{
     return tot + item;
   });
-  this.spendAmtBeforeDiscount = Math.round(this.spendAmtBeforeDiscount*100)/100;
+  this.spendAmtBeforeDiscount = (Math.round(this.spendAmtBeforeDiscount*100)/100).toFixed(2);
+}
+
+Till.prototype.calcBasicDiscount = function(){
+  if (this.spendAmtBeforeDiscount >= 50){
+    this.genDiscAmt = this.discounts["general"]/100 * this.spendAmtBeforeDiscount;
+  }
+  this.genDiscAmt = ((Math.round(this.genDiscAmt*100))/100).toFixed(2);
+}
+
+Till.prototype.calcTaxation = function(){
+  this.totalTax = this.taxPercent/100 * this.spendAmtBeforeDiscount;
+  this.totalTax = ((Math.round(this.totalTax*100))/100).toFixed(2);
+}
+
+Till.prototype.finalTotal = function(){
+  this.totalOwed = parseFloat(this.spendAmtBeforeDiscount)-parseFloat(this.genDiscAmt);
+  this.totalOwed = (this.totalOwed).toFixed(2);
 }
 
 Till.prototype.createRectHeader = function(){
-  // console.log(this.basket);
+  this.calcBasicTotal();
+  this.calcBasicDiscount();
+  this.calcTaxation();
+  this.finalTotal();
   var receiptComps = {};
   receiptComps["dateTime"] = createDateTime();
   receiptComps["name"] = this.shopName;
   receiptComps["address"] = this.address;
   receiptComps["phone"] = this.phone;
   receiptComps["purchs"] = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH);
+  receiptComps["grossTotal"] = alignRight(this.spendAmtBeforeDiscount, this.INVOICEITEMCHARLENGTH, "Total");
+  receiptComps["basicDiscount"] = alignRight(this.genDiscAmt, this.INVOICEITEMCHARLENGTH, `General ${this.discounts["general"]}% discount`);
+  receiptComps["totalTax"] = alignRight(this.totalTax, this.INVOICEITEMCHARLENGTH, `Tax at ${this.taxPercent}%`);
+  receiptComps["grandTotal"] = alignRight(this.totalOwed, this.INVOICEITEMCHARLENGTH, "Total:");
   return receiptComps;
 }
 
-function createPurchList(purchs,prices,lineLen){
+function createPurchList(purchs, prices, lineLen){
   var listText = purchs.map(v=>{
     var temp = [];
     temp.push(v[0],v[1],prices[v[0]])
@@ -66,6 +89,17 @@ function createPurchList(purchs,prices,lineLen){
   });
   return alignPurchs(listText, lineLen);
 }
+
+function alignRight(item, totLineLen, textPrefix){
+  var lengthRem = totLineLen - item.toString().length - textPrefix.length-1;
+  var line = "";
+  var spaces = "";
+  // console.log(lengthRem);
+  lengthRem>0 ? spaces = padSpaces(lengthRem) : spaces = "";
+  line += `${spaces}${textPrefix} ${item}`;
+  return line;
+}
+
 
 function alignPurchs(purchs,totLineLen){
   return purchs.map(v=>{
