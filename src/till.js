@@ -31,7 +31,7 @@ function Till(){
   this.spendAmtAfterDiscount = 0;     // Not yet used!
   this.totalTax = 0;
   this.totalOwed = 0;
-  this.INVOICEITEMCHARLENGTH =25;       // Sets the spacing of the individual invoice items.
+  this.INVOICEITEMCHARLENGTH = 30;       // Sets the spacing of the individual invoice items.
 
 }
 
@@ -54,35 +54,37 @@ Till.prototype.createRectHeader = function(){
   receiptComps["name"] = this.shopName;
   receiptComps["address"] = this.address;
   receiptComps["phone"] = this.phone;
-  receiptComps["purchs"] = createPurchList(this.basket,this.prices);
+  receiptComps["purchs"] = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH);
   return receiptComps;
 }
 
-function createPurchList(purchs,prices){
+function createPurchList(purchs,prices,lineLen){
   var listText = purchs.map(v=>{
     var temp = [];
     temp.push(v[0],v[1],prices[v[0]])
     return temp;
   });
-  return alignPurchs(listText);
+  return alignPurchs(listText, lineLen);
 }
 
-function alignPurchs(purchs){
-  // console.log("purchs:",purchs);
+function alignPurchs(purchs,totLineLen){
   return purchs.map(v=>{
-    console.log(pad('                      ',(`${v[1]} x £${(v[2]).toFixed(2)}`),true));
-    return pad('                      ',(`${v[1]} x £${(v[2]).toFixed(2)}`),true);
+    var qtyPrice = `${v[1]} x £${(v[2]).toFixed(2)}`;
+    var item = v[0];
+    var lengthRem = totLineLen - qtyPrice.length;
+    var line = "";
+    if (lengthRem-item.length>0){
+      var spaces = padSpaces(lengthRem-item.length);
+      line += `${item}${spaces}${qtyPrice}`;
+    } else {
+      line += `${item.slice(0,lengthRem-item.length-1)} ${qtyPrice}`;
+    }
+    return line;
   })
 }
 
-function pad(pad, str, padLeft) {           // Align the receipt items nicely.
-  if (typeof str === 'undefined')
-    return pad;
-  if (padLeft) {
-    return (pad + str).slice(-pad.length);
-  } else {
-    return (str + pad).substring(0, pad.length);
-  }
+function padSpaces(len){
+  return new Array(len+1).join(" ");
 }
 
 function createDateTime(){
