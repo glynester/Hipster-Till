@@ -31,12 +31,13 @@ function Till(){
   this.spendAmtAfterDiscount = 0;     // Not yet used!
   this.totalTax = 0;
   this.totalOwed = 0;
+  this.INVOICEITEMCHARLENGTH =25;       // Sets the spacing of the individual invoice items.
 
 }
 
 Till.prototype.addItem = function(item,number){
   if (!this.prices[item]) return false;
-  this.basket.push([item,number]);
+  this.basket.push([item,parseInt(number)]);
 }
 
 Till.prototype.calcBasicTotal = function(){
@@ -47,8 +48,41 @@ Till.prototype.calcBasicTotal = function(){
 }
 
 Till.prototype.createRectHeader = function(){
-  var header = createDateTime();
-  return header;
+  // console.log(this.basket);
+  var receiptComps = {};
+  receiptComps["dateTime"] = createDateTime();
+  receiptComps["name"] = this.shopName;
+  receiptComps["address"] = this.address;
+  receiptComps["phone"] = this.phone;
+  receiptComps["purchs"] = createPurchList(this.basket,this.prices);
+  return receiptComps;
+}
+
+function createPurchList(purchs,prices){
+  var listText = purchs.map(v=>{
+    var temp = [];
+    temp.push(v[0],v[1],prices[v[0]])
+    return temp;
+  });
+  return alignPurchs(listText);
+}
+
+function alignPurchs(purchs){
+  // console.log("purchs:",purchs);
+  return purchs.map(v=>{
+    console.log(pad('                      ',(`${v[1]} x £${(v[2]).toFixed(2)}`),true));
+    return pad('                      ',(`${v[1]} x £${(v[2]).toFixed(2)}`),true);
+  })
+}
+
+function pad(pad, str, padLeft) {           // Align the receipt items nicely.
+  if (typeof str === 'undefined')
+    return pad;
+  if (padLeft) {
+    return (pad + str).slice(-pad.length);
+  } else {
+    return (str + pad).substring(0, pad.length);
+  }
 }
 
 function createDateTime(){
@@ -58,7 +92,6 @@ function createDateTime(){
   let day = (date.getDate());
   let year = (date.getFullYear());
   var retDate = `${[pad(day),pad(month),year].join('/')}`;
-  // return retDate;
   date.toTimeString();
   date.toTimeString().split(' ');
   var retTime=date.toTimeString ().split(' ')[0];
