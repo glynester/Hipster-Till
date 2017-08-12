@@ -2,8 +2,6 @@ $(document).ready(function(){
   till = new Till();
   initialise();
   function initialise(){
-    // till.prices; // Create dropdown listing of menu items and prices.
-    // console.log("initialising...");
     var menuObj = till.prices;
     var sel = $('#menuItems');
     for(var prop in menuObj){
@@ -17,7 +15,6 @@ $(document).ready(function(){
   })
 
   function createRect(){
-    // $('#receipt').attr('value',till.createRectHeader());
     $('#receipt').append($("<p>").text(`${till.createRectHeader()}`));
     $('#receipt').append($("<p>").text(`${till.shopName}`));
     $('#receipt').append($("<p>").text(`${till.address}`));

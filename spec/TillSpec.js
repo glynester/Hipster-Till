@@ -12,28 +12,28 @@ describe ("till",function(){
   });
 
   it ("should add an item to the basket", function(){
-    till.addItem("Choc Mudcake");
-    expect(till.basket[0]).toEqual("Choc Mudcake");
+    till.addItem("Choc Mudcake",1);
+    expect(till.basket[0]).toEqual(["Choc Mudcake",1]);
   });
 
   it ("should allow multiple items to be added to the basket", function(){
-    till.addItem("Choc Mudcake");
-    till.addItem("Choc Mudcake");
-    till.addItem("Chocolate Chip Muffin");
-    expect(till.basket[2]).toEqual("Chocolate Chip Muffin");
+    till.addItem("Choc Mudcake",1);
+    till.addItem("Americano",1);
+    till.addItem("Chocolate Chip Muffin",2);
+    expect(till.basket[2]).toEqual(["Chocolate Chip Muffin",2]);
   });
 
   it ("should not allow a non-menu item to be added to the basket", function(){
-    till.addItem("Maccaroni Cheese");
+    till.addItem("Maccaroni Cheese",1);
     expect(till.basket.length).toEqual(0);
   });
 
   it ("should calculate a basic total cost of items ordered", function(){
-    till.addItem("Cappucino");
-    till.addItem("Affogato");
-    till.addItem("Cortado");
+    till.addItem("Cappucino",2);
+    till.addItem("Affogato",2);
+    till.addItem("Cortado",2);
     till.calcBasicTotal();
-    expect(till.spendAmtBeforeDiscount).toEqual(23.2);
+    expect(till.spendAmtBeforeDiscount).toEqual(46.4);
   })
 
 

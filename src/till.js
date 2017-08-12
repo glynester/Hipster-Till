@@ -15,7 +15,7 @@ function Till(){
   // Remove when json file is working!
   this.shopName = "The Coffee Connection";
   this.address = "123 Lakeside Way";
-  this.phone = "16503600708";
+  this.phone = "+1(650)360-0708";
   this.prices = {"Cafe Latte": 4.75, "Flat White": 4.75,  "Cappucino": 3.85,  "Single Espresso": 2.05,
     "Double Espresso": 3.75,  "Americano": 3.75,  "Cortado": 4.55,  "Tea": 3.65,
     "Choc Mudcake": 6.40,  "Choc Mousse": 8.20,  "Affogato": 14.80,  "Tiramisu": 11.40,
@@ -34,13 +34,13 @@ function Till(){
 
 }
 
-Till.prototype.addItem = function(item){
+Till.prototype.addItem = function(item,number){
   if (!this.prices[item]) return false;
-  this.basket.push(item);
+  this.basket.push([item,number]);
 }
 
 Till.prototype.calcBasicTotal = function(){
-  this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v]).reduce((tot,item)=>{
+  this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v[0]]*v[1]).reduce((tot,item)=>{
     return tot + item;
   });
   this.spendAmtBeforeDiscount = Math.round(this.spendAmtBeforeDiscount*100)/100;
