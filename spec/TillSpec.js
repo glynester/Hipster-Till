@@ -34,7 +34,7 @@ describe ("till",function(){
     till.addItem("Cortado",2);
     till.createRectHeader();
     expect(till.spendAmtBeforeDiscount).toEqual("46.40");
-  })
+  });
 
   it ("should not apply the general discount if total cost < £50", function(){
     till.addItem("Cappucino",2);
@@ -42,7 +42,7 @@ describe ("till",function(){
     till.addItem("Cortado",2);
     till.createRectHeader();
     expect(till.genDiscAmt).toEqual("0.00");
-  })
+  });
 
   it ("should apply the general discount if total cost > £50", function(){
     till.addItem("Cappucino",2);
@@ -51,20 +51,20 @@ describe ("till",function(){
     till.addItem("Choc Mousse",3);
     till.createRectHeader();
     expect(till.genDiscAmt).toEqual("3.55");
-  })
+  });
 
   it ("should apply the correct tax rate", function(){
     till.addItem("Blueberry Muffin",4);
     till.createRectHeader();
     expect(till.totalTax).toEqual("1.40");
-  })
+  });
 
   it ("should calculate the correct overall total", function(){
     till.addItem("Tiramisu",4);
     till.addItem("Cafe Latte",5);
     till.createRectHeader();
     expect(till.totalOwed).toEqual("65.88");
-  })
+  });
 
   it ("should return the correct change for cash tendered",function(){
     till.addItem("Cortado",3);
@@ -73,16 +73,18 @@ describe ("till",function(){
     till.calcCashOwed();
     expect(till.cashTendered).toEqual("20.65");
     expect(till.changeOwed).toEqual("7.00");
-  })
+  });
 
+  it ("should return not allow insufficient cash to be tendered",function(){
+    till.addItem("Choc Mousse",5);
+    till.tenderCash(10);
+    expect(till.cashTendered).toEqual(0);
+  });
 
-})
+  it ("should return not allow an invalid cash entry to be made",function(){
+    till.addItem("Choc Mousse",5);
+    till.tenderCash("hello");
+    expect(till.cashTendered).toEqual(0);
+  });
 
-
-
-// describe Shop do
-//   context 'Shop initialization and setup' do
-//     it 'initializes with a set format json file' do
-//       shop = Shop.new("./spec/test.json")
-//       expect(shop.shopname).to eq("Test Company")
-//     end
+});

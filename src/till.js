@@ -86,7 +86,7 @@ Till.prototype.tenderCash = function(cash){
     console.log("No items have been ordered yet.");
     return false;
   }
-  if (!cash){
+  if ((!cash)||(!parseFloat(cash))){
     console.log("No cash amount has been entered.");
     return false;
   }
