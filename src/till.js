@@ -38,6 +38,7 @@ function Till(){
 
 Till.prototype.addItem = function(item,number){
   if (!this.prices[item]) return false;
+  if (!number) return false;
   this.basket.push([item,parseInt(number)]);
 }
 
@@ -66,7 +67,9 @@ Till.prototype.finalTotal = function(){
 }
 
 Till.prototype.tenderCash = function(cash){
-  this.cashTendered = (cash).toFixed(2);
+  // console.log(cash, typeof(cash));
+  this.cashTendered = (parseFloat(cash)).toFixed(2);
+  console.log(this.cashTendered);
 }
 
 Till.prototype.calcCashOwed = function(cash){
@@ -80,6 +83,7 @@ Till.prototype.createRectHeader = function(){
   this.calcBasicDiscount();
   this.calcTaxation();
   this.finalTotal();
+  this.calcCashOwed();
   var receiptComps = {};
   receiptComps["dateTime"] = createDateTime();
   receiptComps["name"] = this.shopName;
@@ -90,6 +94,8 @@ Till.prototype.createRectHeader = function(){
   receiptComps["basicDiscount"] = align(this.genDiscAmt, this.INVOICEITEMCHARLENGTH, `General ${this.discounts["general"]}% discount`);
   receiptComps["totalTax"] = align(this.totalTax, this.INVOICEITEMCHARLENGTH, `Tax at ${this.taxPercent}%`);
   receiptComps["grandTotal"] = align(this.totalOwed, this.INVOICEITEMCHARLENGTH, "Total:");
+  receiptComps["cash"] = align(this.cashTendered, this.INVOICEITEMCHARLENGTH, "Cash:");
+  receiptComps["change"] = align(this.changeOwed, this.INVOICEITEMCHARLENGTH, "Change:");
   return receiptComps;
 }
 

@@ -7,7 +7,6 @@ $(document).ready(function(){
     for(var prop in menuObj){
       sel.append($("<option>").attr('value',prop).text(`${prop} (£${menuObj[prop].toFixed(2)})`));
     }
-
   }
 
   $('#btnAddItem').click(function(){
@@ -23,7 +22,7 @@ $(document).ready(function(){
   })
 
   function createRect(){
-    $('#receipt').css({'padding':'10px'});    // Need to set programmatically or receipt is visible.
+    $('#receipt').css({'padding':'10px'});    // Need to set programmatically or receipt padding will be visible.
     $('#receipt').append($("<img>").attr("src","images/cup.png"));
     var recItems = till.createRectHeader();
     for (var v in recItems){
@@ -37,5 +36,11 @@ $(document).ready(function(){
     };
     $('#receipt').append($("<img>").attr("src","images/thanks.png"));
   }
+
+  $('#btnAddCash').click(function(){
+    // console.log("Add cash clicked!!!");
+    var cash = $('#cash').val();
+    // till.tenderCash(cash);
+  })
 
 });
