@@ -37,12 +37,26 @@ function Till(){
 }
 
 Till.prototype.addItem = function(item,number){
-  if (!this.prices[item]) return false;
-  if (!number) return false;
+  if (!item) {
+    console.log("You have not entered an item to add.")
+    return false;
+  }
+  if (!this.prices[item]) {
+    console.log("That item does not exist.")
+    return false;
+  }
+  if (!parseInt(number)) {
+    console.log("No quantity has been entered.");
+    return false;
+  }
   this.basket.push([item,parseInt(number)]);
 }
 
 Till.prototype.calcBasicTotal = function(){
+  if (this.basket.length==0) {
+    console.log("You have not entered any items yet.")
+    return false;
+  }
   this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v[0]]*v[1]).reduce((tot,item)=>{
     return tot + item;
   });
@@ -67,13 +81,27 @@ Till.prototype.finalTotal = function(){
 }
 
 Till.prototype.tenderCash = function(cash){
-  // console.log(cash, typeof(cash));
+  this.createRectHeader();          // Need to update final amount owed to calculate if cash is sufficient.
+  if (!this.anyItemsOrdered()){
+    console.log("No items have been ordered yet.");
+    return false;
+  }
+  if (!cash){
+    console.log("No cash amount has been entered.");
+    return false;
+  }
+  if (cash<this.totalOwed){
+    console.log("You have not entered anough cash.");
+    return false;
+  }
   this.cashTendered = (parseFloat(cash)).toFixed(2);
-  console.log(this.cashTendered);
+}
+
+Till.prototype.anyItemsOrdered = function(cash){
+  return this.basket.length>0;
 }
 
 Till.prototype.calcCashOwed = function(cash){
-  console.log(parseFloat(this.totalOwed));
   this.changeOwed = parseFloat(this.cashTendered)-parseFloat(this.totalOwed);
   this.changeOwed = (this.changeOwed).toFixed(2);
 }
@@ -112,7 +140,6 @@ function align(item, totLineLen, textPrefix){
   var lengthRem = totLineLen - item.toString().length - textPrefix.length;
   var line = "";
   var spaces = "";
-  // console.log(lengthRem);
   lengthRem>0 ? spaces = padSpaces(lengthRem) : spaces = "";
   line += `${textPrefix}${spaces}${item}`;
   return line;

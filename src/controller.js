@@ -10,10 +10,8 @@ $(document).ready(function(){
   }
 
   $('#btnAddItem').click(function(){
-    // console.log("Add item clicked!!!")
     var item = $('#menuItems option:selected').val();
     var qty = $('#quantity').val();
-    // console.log(item,qty);
     till.addItem(item,qty);
   })
 
@@ -22,6 +20,7 @@ $(document).ready(function(){
   })
 
   function createRect(){
+    $('#receipt').empty();
     $('#receipt').css({'padding':'10px'});    // Need to set programmatically or receipt padding will be visible.
     $('#receipt').append($("<img>").attr("src","images/cup.png"));
     var recItems = till.createRectHeader();
@@ -38,9 +37,8 @@ $(document).ready(function(){
   }
 
   $('#btnAddCash').click(function(){
-    // console.log("Add cash clicked!!!");
     var cash = $('#cash').val();
-    // till.tenderCash(cash);
+    till.tenderCash(cash);
   })
 
 });
