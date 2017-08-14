@@ -8,6 +8,21 @@ $(document).ready(function(){
       sel.append($("<option>").attr('value',prop).text(`${prop} (£${menuObj[prop].toFixed(2)})`));
     }
   }
+  $('#messages').hide();
+
+  function showMessage(){
+    console.log(till.message);
+    if (till.message[1] != 0){
+      $('#messages').text(till.message[0]);
+      $('#messages').show();
+      till.message[1] = 0;
+    } else if (till.message[1] == 0){
+      $('#messages').text("");
+      $('#messages').hide();
+      till.message[0] = "";
+      till.message[1] = 0;
+    }
+}
 
   $('#btnClearAll').click(function(){
     clearAll();
@@ -15,6 +30,7 @@ $(document).ready(function(){
 
   function clearAll(){
     till.reset();
+    $('#messages').hide();
     $('#receipt').empty();
     $('#receipt').css({'padding':'0px'});    // Need to set programmatically or receipt padding will be visible.
     $('#cash').val("");
@@ -33,6 +49,7 @@ $(document).ready(function(){
     till.addItem(item,qty);
     till.calcBasicTotal();
     till.calcBasicDiscount();
+    showMessage();
     $('#menuItems').val('');
     // $("#menuItems option:first").attr("selected", true);
     $('#quantity').val("");
@@ -50,8 +67,10 @@ $(document).ready(function(){
     //XXXXXXXXXXXXXXXXXXXXX
     if (parseInt(till.cashTendered)>parseInt(till.totalOwed)){
       createRect();
-    } else console.log("Enter a cash received amount first.");
-
+    } else {
+      this.message = ["Enter a cash received amount first.",1];
+      console.log("Enter a cash received amount first.");
+    }
   })
 
   function createRect(){
@@ -76,6 +95,7 @@ $(document).ready(function(){
   $('#btnAddCash').click(function(){
     var cash = $('#cash').val();
     till.tenderCash(cash);
+    showMessage();
   })
 
 });

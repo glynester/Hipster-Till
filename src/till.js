@@ -32,6 +32,7 @@ function Till(){
   this.totalOwed = 0;
   this.cashTendered = 0;
   this.changeOwed = 0;
+  this.message = ["xxx",0];
   this.GENERALDISCOUNTTHRESHHOLD = 50;
   this.INVOICEITEMCHARLENGTH = 30;       // In chars. Sets the spacing of the individual invoice items.
   this.RECEIPTWIDTH = 240;               // In pixels. Used to dynamically set receipt width.
@@ -46,19 +47,23 @@ Till.prototype.reset = function(){
 
 Till.prototype.addItem = function(item,number){
   if (!item) {
+    this.message = ["You have not entered an item to add.",1];
     console.log("You have not entered an item to add.")
     return false;
   }
   if (!this.prices[item]) {
+    this.message = ["That item does not exist.",1];
     console.log("That item does not exist.")
     return false;
   }
   if (!parseInt(number)) {
+    this.message = ["No quantity has been entered.",1];
     console.log("No quantity has been entered.");
     return false;
   }
   if (parseFloat(number)!=parseInt(number)||parseInt(number)<=0) {
-    console.log("Invalid quantity has been entered.");
+    this.message = ["An invalid quantity has been entered.",1];
+    console.log("An invalid quantity has been entered.");
     return false;
   }
   this.basket.push([item,parseInt(number)]);
@@ -94,15 +99,18 @@ Till.prototype.finalTotal = function(){
 Till.prototype.tenderCash = function(cash){
   this.createRectHeader();          // Need to update final amount owed to calculate if cash is sufficient.
   if (!this.anyItemsOrdered()){
+    this.message = ["No items have been ordered yet.",1];
     console.log("No items have been ordered yet.");
     return false;
   }
   if ((!cash)||(!parseFloat(cash))){
+    this.message = ["No cash amount has been entered.",1];
     console.log("No cash amount has been entered.");
     return false;
   }
-  // console.log(cash,this.totalOwed);
+
   if (cash<parseFloat(this.totalOwed)){
+    this.message = ["You have not entered enough cash.",1];
     console.log("You have not entered enough cash.");
     return false;
   }
