@@ -33,7 +33,9 @@ function Till(){
   this.cashTendered = 0;
   this.changeOwed = 0;
   this.GENERALDISCOUNTTHRESHHOLD = 50;
-  this.INVOICEITEMCHARLENGTH = 30;       // Sets the spacing of the individual invoice items.
+  this.INVOICEITEMCHARLENGTH = 30;       // In chars. Sets the spacing of the individual invoice items.
+  this.RECEIPTWIDTH = 240;               // In pixels. Used to dynamically set receipt width.
+  this.CURRENTPURCHLISTWIDTH = 320;      // In pixels. Used to dynamically set the constantly updating, purchase list width.
 }
 
 Till.prototype.addItem = function(item,number){
@@ -54,7 +56,6 @@ Till.prototype.addItem = function(item,number){
 
 Till.prototype.calcBasicTotal = function(){
   if (this.basket.length==0) {
-    console.log("You have not entered any items yet.")
     return false;
   }
   this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v[0]]*v[1]).reduce((tot,item)=>{
@@ -90,6 +91,7 @@ Till.prototype.tenderCash = function(cash){
     console.log("No cash amount has been entered.");
     return false;
   }
+  console.log(cash,this.totalOwed);
   if (cash<this.totalOwed){
     console.log("You have not entered anough cash.");
     return false;
@@ -112,14 +114,17 @@ Till.prototype.createRectHeader = function(){
   this.calcTaxation();
   this.finalTotal();
   this.calcCashOwed();
+  if(till.cashTendered==0)return false;
   var receiptComps = {};
   receiptComps["dateTime"] = createDateTime();
   receiptComps["name"] = this.shopName;
   receiptComps["address"] = this.address;
   receiptComps["phone"] = this.phone;
-  receiptComps["purchs"] = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH);
+  receiptComps["purchs"] = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH,"purchsListForReceipt");
   receiptComps["grossTotal"] = align(this.spendAmtBeforeDiscount, this.INVOICEITEMCHARLENGTH, "Total");
-  receiptComps["basicDiscount"] = align(this.genDiscAmt, this.INVOICEITEMCHARLENGTH, `General ${this.discounts["general"]}% discount`);
+  if (this.genDiscAmt>0){
+    receiptComps["basicDiscount"] = align(this.genDiscAmt, this.INVOICEITEMCHARLENGTH, `General ${this.discounts["general"]}% discount`);
+  }
   receiptComps["totalTax"] = align(this.totalTax, this.INVOICEITEMCHARLENGTH, `Tax at ${this.taxPercent}%`);
   receiptComps["grandTotal"] = align(this.totalOwed, this.INVOICEITEMCHARLENGTH, "Total:");
   receiptComps["cash"] = align(this.cashTendered, this.INVOICEITEMCHARLENGTH, "Cash:");
@@ -127,13 +132,24 @@ Till.prototype.createRectHeader = function(){
   return receiptComps;
 }
 
-function createPurchList(purchs, prices, lineLen){
+Till.prototype.createInterimPurchList = function(){
+  var interimPurchList = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH+10,"purchsListForDisplay")
+  // Added 10 chars because the "purchsListForDisplay" is wider than the "purchsListForReceipt".
+  return interimPurchList;
+}
+
+function createPurchList(purchs, prices, lineLen, mode){
+  var listText = createPurchListArray(purchs, prices);
+  return alignPurchs(listText, lineLen, mode);
+}
+
+function createPurchListArray(purchs, prices){
   var listText = purchs.map(v=>{
     var temp = [];
     temp.push(v[0],v[1],prices[v[0]])
     return temp;
   });
-  return alignPurchs(listText, lineLen);
+  return listText;
 }
 
 function align(item, totLineLen, textPrefix){
@@ -145,10 +161,13 @@ function align(item, totLineLen, textPrefix){
   return line;
 }
 
-
-function alignPurchs(purchs,totLineLen){
+function alignPurchs(purchs,totLineLen, mode){
   return purchs.map(v=>{
-    var qtyPrice = `${v[1]} x £${(v[2]).toFixed(2)}`;
+    if (mode=="purchsListForReceipt"){
+      var qtyPrice = `${v[1]} x £${(v[2]).toFixed(2)}`;
+    } else if (mode=="purchsListForDisplay"){
+      var qtyPrice = `${v[1]} x £${(v[2]).toFixed(2)} = £${(v[1]*v[2]).toFixed(2)}`;
+    }
     var item = v[0];
     var lengthRem = totLineLen - qtyPrice.length;
     var line = "";

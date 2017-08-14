@@ -13,6 +13,16 @@ $(document).ready(function(){
     var item = $('#menuItems option:selected').val();
     var qty = $('#quantity').val();
     till.addItem(item,qty);
+    till.calcBasicTotal();
+    till.calcBasicDiscount();
+    $('#amtOwed').text(`£${(parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt)).toFixed(2)}`);
+
+    $('#receipt').empty();
+    var items = till.createInterimPurchList();
+    $('#receipt').css({'width':`${till.CURRENTPURCHLISTWIDTH}px`});
+    items.forEach(v=>{
+      $('#receipt').append($("<pre>").text(v));
+    })
   })
 
   $('#btnGenRecpt').click(function(){
@@ -20,10 +30,12 @@ $(document).ready(function(){
   })
 
   function createRect(){
+    var recItems = till.createRectHeader();
+    if (!recItems) return false;
     $('#receipt').empty();
+    $('#receipt').css({'width':`${till.RECEIPTWIDTH}px`});
     $('#receipt').css({'padding':'10px'});    // Need to set programmatically or receipt padding will be visible.
     $('#receipt').append($("<img>").attr("src","images/cup.png"));
-    var recItems = till.createRectHeader();
     for (var v in recItems){
       if (v=="purchs"){
         recItems[v].forEach(i=>{

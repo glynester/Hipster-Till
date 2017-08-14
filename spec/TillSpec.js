@@ -75,13 +75,13 @@ describe ("till",function(){
     expect(till.changeOwed).toEqual("7.00");
   });
 
-  it ("should return not allow insufficient cash to be tendered",function(){
+  it ("should not allow insufficient cash to be tendered",function(){
     till.addItem("Choc Mousse",5);
     till.tenderCash(10);
     expect(till.cashTendered).toEqual(0);
   });
 
-  it ("should return not allow an invalid cash entry to be made",function(){
+  it ("should not allow an invalid cash entry to be made",function(){
     till.addItem("Choc Mousse",5);
     till.tenderCash("hello");
     expect(till.cashTendered).toEqual(0);

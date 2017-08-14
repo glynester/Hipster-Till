@@ -12,18 +12,23 @@
 </head>
 <body>
   <h1> Till </h1>
+  <div style="padding-bottom: 10px">
+    Total spent
+    <output id="amtOwed" type="text" title = "Total amount owed."></output>
+  </div>
   <button type="button" id="btnAddItem" title = "Click to add the item to the bill.">Add Item</button>
   <select id="menuItems" title = "Select a menu item.">
     <option value=""></option>
   </select>
   <input id="quantity" type = "text" title = "Enter the quantity here.">
   <div>
-    <button type="button" id="btnAddCash" title = "Click to enter the amount of cash tendered.">Add Cash</button>
+    <button type="button" id="btnAddCash" title = "Click to enter the amount of cash tendered.">Cash Received</button>
     <input id="cash" type="text" title = "Enter cash received.">
   </div>
   <div>
     <button type="button" id="btnGenRecpt" title = "Click to generate the receipt.">Generate Receipt</button>
   </div>
+  <button type="button" id="btnClearAll" title = "Click to reset.">Reset</button>
   <div id="receipt"></div>
 
 </body>
