@@ -102,7 +102,7 @@ Till.prototype.tenderCash = function(cash){
     return false;
   }
   // console.log(cash,this.totalOwed);
-  if (cash<this.totalOwed){
+  if (cash<parseFloat(this.totalOwed)){
     console.log("You have not entered enough cash.");
     return false;
   }
@@ -124,7 +124,7 @@ Till.prototype.createRectHeader = function(){
   this.calcTaxation();
   this.finalTotal();
   this.calcCashOwed();
-  if(till.cashTendered==0)return false;
+  // if(till.cashTendered==0)return false;
   var receiptComps = {};
   receiptComps["dateTime"] = createDateTime();
   receiptComps["name"] = this.shopName;

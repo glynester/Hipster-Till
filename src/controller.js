@@ -16,21 +16,26 @@ $(document).ready(function(){
   function clearAll(){
     till.reset();
     $('#receipt').empty();
+    $('#receipt').css({'padding':'0px'});    // Need to set programmatically or receipt padding will be visible.
     $('#cash').val("");
     $('#quantity').val("");
     $('#amtOwed').val("£0.00");
-    $('#menuItems').removeAttr("selected");
-    $("#menuItems option:first").attr("selected", true);
+    // $('#menuItems').removeAttr("selected");
+    $('#menuItems').val('');
+    // $("#menuItems option:first").attr("selected", true);
   }
 
   $('#btnAddItem').click(function(){
     var item = $('#menuItems option:selected').val();
     var qty = $('#quantity').val();
-    till.cashTendered = 0; //Allows more items to be added by resetting the cash amount received to zero.
+    till.cashTendered = 0;                  //Allows more items to be added by resetting the cash amount received to zero.
     $('#cash').val("");
     till.addItem(item,qty);
     till.calcBasicTotal();
     till.calcBasicDiscount();
+    $('#menuItems').val('');
+    // $("#menuItems option:first").attr("selected", true);
+    $('#quantity').val("");
     $('#amtOwed').text(`£${(parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt)).toFixed(2)}`);
 
     $('#receipt').empty();
@@ -42,7 +47,11 @@ $(document).ready(function(){
   })
 
   $('#btnGenRecpt').click(function(){
-    createRect();
+    //XXXXXXXXXXXXXXXXXXXXX
+    if (parseInt(till.cashTendered)>parseInt(till.totalOwed)){
+      createRect();
+    } else console.log("Enter a cash received amount first.");
+
   })
 
   function createRect(){
