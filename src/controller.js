@@ -9,9 +9,25 @@ $(document).ready(function(){
     }
   }
 
+  $('#btnClearAll').click(function(){
+    clearAll();
+  })
+
+  function clearAll(){
+    till.reset();
+    $('#receipt').empty();
+    $('#cash').val("");
+    $('#quantity').val("");
+    $('#amtOwed').val("£0.00");
+    $('#menuItems').removeAttr("selected");
+    $("#menuItems option:first").attr("selected", true);
+  }
+
   $('#btnAddItem').click(function(){
     var item = $('#menuItems option:selected').val();
     var qty = $('#quantity').val();
+    till.cashTendered = 0; //Allows more items to be added by resetting the cash amount received to zero.
+    $('#cash').val("");
     till.addItem(item,qty);
     till.calcBasicTotal();
     till.calcBasicDiscount();

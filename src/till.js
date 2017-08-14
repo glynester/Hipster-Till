@@ -38,6 +38,12 @@ function Till(){
   this.CURRENTPURCHLISTWIDTH = 320;      // In pixels. Used to dynamically set the constantly updating, purchase list width.
 }
 
+Till.prototype.reset = function(){
+  this.basket = [];
+  this.cashTendered = 0;
+  this.createRectHeader();
+}
+
 Till.prototype.addItem = function(item,number){
   if (!item) {
     console.log("You have not entered an item to add.")
@@ -49,6 +55,10 @@ Till.prototype.addItem = function(item,number){
   }
   if (!parseInt(number)) {
     console.log("No quantity has been entered.");
+    return false;
+  }
+  if (parseFloat(number)!=parseInt(number)||parseInt(number)<=0) {
+    console.log("Invalid quantity has been entered.");
     return false;
   }
   this.basket.push([item,parseInt(number)]);
@@ -91,9 +101,9 @@ Till.prototype.tenderCash = function(cash){
     console.log("No cash amount has been entered.");
     return false;
   }
-  console.log(cash,this.totalOwed);
+  // console.log(cash,this.totalOwed);
   if (cash<this.totalOwed){
-    console.log("You have not entered anough cash.");
+    console.log("You have not entered enough cash.");
     return false;
   }
   this.cashTendered = (parseFloat(cash)).toFixed(2);

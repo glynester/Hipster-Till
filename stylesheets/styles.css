@@ -1,5 +1,5 @@
 body {
-  background-color: #F3DFC7;
+  background-color: rgb(255,255,204);
   font-family:MetricWeb,sans-serif;
 }
 	html {
@@ -19,6 +19,15 @@ body {
     margin-bottom: 15px;
     text-align: center;
   }
+
+  #appContainer {
+  border: 1px solid black;
+  width: 500px;
+  margin: 0 auto;
+  text-align:center;
+  padding: 20px;
+  background-color: #F3DFC7;
+}
 
   #receipt {
     background-color: white;
