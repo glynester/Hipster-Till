@@ -24,7 +24,7 @@ console.log(till.createRectHeader());   // Creates an object containing all rece
 console.log(till.changeOwed);  
 ```
 ## With web interface  
-Load index.html into a browser.
+Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).  
 Click on the dropdown list next to the "Add Item" button.  
 Enter a quantity in the box to the right of that.  
 Click the "Add Item" button to add the item as a purchase.  
@@ -42,9 +42,13 @@ Any error message will display at the top.
 
 
 # Running a webserver in UBUNTU
+If you try and run the website from a local file system you will get a "Cross origin request" error when you try and access the JSON file. This is because brower security is much tighter around JS methods associated with local files.   
+To get round this, you need to run this website on a webserver.  
+To open a webserver in UBUNTU do the following:  
 In terminal, navigate to the folder your files are in, e.g. "/course_projects/Hipster-Till".  
 Type the following command to run a server "sudo python2 -m SimpleHTTPServer 80" or "sudo python3 -m http.server 80".  
 Type localhost into a Chrome browser to open the website on the server.  
+The website functionality should now work correctly.  
 
 ---
 ---
