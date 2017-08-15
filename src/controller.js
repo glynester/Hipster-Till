@@ -10,6 +10,7 @@ $(document).ready(function(){
     $('#messages').hide();
     $('#btnGenRecpt').attr("disabled",true);
     $('#btnAddCash').attr("disabled",true);
+    $('#btnClearAll').attr("disabled",true);
   }
 
 
@@ -44,6 +45,7 @@ $(document).ready(function(){
     $('#changeDue').val("£0.00");
     $('#btnGenRecpt').attr("disabled",true);
     $('#btnAddCash').attr("disabled",true);
+    $('#btnClearAll').attr("disabled",true);
   }
 
   $('#btnAddItem').click(function(){
@@ -61,6 +63,7 @@ $(document).ready(function(){
     showMessage();
     if (till.anyItemsOrdered()){
       $('#btnAddCash').attr("disabled",false);
+      $('#btnClearAll').attr("disabled",false);
     }
     if (till.message[0]==""){
       $('#menuItems').val('');

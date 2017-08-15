@@ -55,7 +55,7 @@ body {
   }
 
   output {
-    background-color: white;
+    background-color: #eaedf2;
     border: 1px red solid;
     padding: 5px;
   }
