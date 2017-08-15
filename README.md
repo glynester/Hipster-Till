@@ -3,12 +3,13 @@ Cash till simulation using javascript
 
 ## Technology
 Built using javacript and jquery following a MVC pattern.  
-A javacript framework was not used.  
+A javacript development framework was not used.  
+Tests were written using Jasmine.  
 
 ## Without web interface
 ```
 var till = new Till("./files/hipstercoffee.json");               // Not yet working
-var till = new Till(); 
+var till = new Till();
 till.addItem("Blueberry Muffin",6);  
 till.addItem("Tea",4);  
 till.addItem("Affogato",2);  
@@ -44,7 +45,7 @@ Specification
 
 This is what a sample receipt looks like:
 
-![a receipt](../images/receipt.jpg)
+![a receipt](images/receipt.jpg)
 
 
 Version 1
