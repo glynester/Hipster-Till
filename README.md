@@ -1,20 +1,23 @@
 # Hipster-Till
-Cash till simulation using javascript
+Cash till simulation for a coffee shop using data supplied as a json file (see json format in Appendix 1)
 
 ## Technology
 Built using javacript and jquery following a MVC pattern.  
 A javacript development framework was not used.  
-Tests were written using Jasmine.  
+Used TTD and tests were written using Jasmine.  
 
 ## Without web interface
+Load index.html into a browser.  
+In the console, type the following:
 ```
-var till = new Till("./files/hipstercoffee.json");               // Not yet working
-var till = new Till();
+var till = new Till("./files/hipstercoffee.json");               // Not yet working  
+var till = new Till();  
 till.addItem("Blueberry Muffin",6);  
 till.addItem("Tea",4);  
 till.addItem("Affogato",2);  
-till.calculate_bill;  
-print till.show_receipt;  
+till.tenderCash(100);  
+console.log(till.createRectHeader());   // Creates an object containing all receipt elements.  
+console.log(till.changeOwed);  
 ```
 ## With web interface
 Click on the dropdown list next to the "Add Item" button.  
@@ -79,3 +82,34 @@ Version 3
 Implement a user interface that can actually be used as a till.
 
 You may use whatever technologies you see fit.
+
+APPENDIX 1
+----------
+```
+[
+  {
+    "shopName": "The Coffee Connection",
+    "address": "123 Lakeside Way",
+    "phone": "+1(650)360-0708",
+    "prices": [
+      {
+        "Cafe Latte": 4.75,
+        "Flat White": 4.75,
+        "Cappucino": 3.85,
+        "Single Espresso": 2.05,
+        "Double Espresso": 3.75,
+        "Americano": 3.75,
+        "Cortado": 4.55,
+        "Tea": 3.65,
+        "Choc Mudcake": 6.40,
+        "Choc Mousse": 8.20,
+        "Affogato": 14.80,
+        "Tiramisu": 11.40,
+        "Blueberry Muffin": 4.05,
+        "Chocolate Chip Muffin": 4.05,
+        "Muffin Of The Day": 4.55
+      }
+    ]
+  }
+]
+```

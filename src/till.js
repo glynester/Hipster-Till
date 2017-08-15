@@ -74,7 +74,7 @@ Till.prototype.addItem = function(item,number){
 }
 
 Till.prototype.calcBasicTotal = function(){
-  if (this.basket.length==0) {
+  if (!this.anyItemsOrdered()) {
     return false;
   }
   this.spendAmtBeforeDiscount = this.basket.map(v=>this.prices[v[0]]*v[1]).reduce((tot,item)=>{
@@ -101,7 +101,7 @@ Till.prototype.finalTotal = function(){
 }
 
 Till.prototype.tenderCash = function(cash){
-  if (this.basket.length == 0){
+  if (!this.anyItemsOrdered()){
     this.message = ["No items have been added yet.",1];
     return false;
   }
@@ -116,8 +116,8 @@ Till.prototype.tenderCash = function(cash){
   this.cashTendered = (parseFloat(cash)).toFixed(2);
 }
 
-Till.prototype.anyItemsOrdered = function(cash){
-  return this.basket.length>0;
+Till.prototype.anyItemsOrdered = function(){
+  return (this.basket.length>0);
 }
 
 Till.prototype.calcCashOwed = function(cash){
@@ -138,6 +138,7 @@ Till.prototype.createRectHeader = function(){
     this.message = ["Enter a cash received amount first.",1];
     return 0;
   }
+
   this.receiptComps["dateTime"] = createDateTime();
   this.receiptComps["name"] = this.shopName;
   this.receiptComps["address"] = this.address;
