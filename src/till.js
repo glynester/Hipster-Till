@@ -23,7 +23,7 @@ function Till(){
   //++++++++++++++++++++++++++++++++++++++++
   this.discountTable = {};
   this.basket = [];
-  // this.receipt = [];
+  this.receiptComps = {};
   this.taxPercent = 8.64;
   this.genDiscAmt = 0;
   this.discounts={general:5,muffin:10}
@@ -41,7 +41,15 @@ function Till(){
 
 Till.prototype.reset = function(){
   this.basket = [];
+  this.receiptComps = {};
   this.cashTendered = 0;
+  this.genDiscAmt = 0;
+  this.spendAmtBeforeDiscount = 0;
+  this.totalTax = 0;
+  this.totalOwed = 0;
+  this.cashTendered = 0;
+  this.changeOwed = 0;
+  this.message = ["xxx",0];
   this.createRectHeader();
 }
 
@@ -99,8 +107,8 @@ Till.prototype.finalTotal = function(){
 Till.prototype.tenderCash = function(cash){
   this.createRectHeader();          // Need to update final amount owed to calculate if cash is sufficient.
   if (!this.anyItemsOrdered()){
-    this.message = ["No items have been ordered yet.",1];
-    console.log("No items have been ordered yet.");
+    this.message = ["No items have been added yet.",1];
+    console.log("No items have been added yet.");
     return false;
   }
   if ((!cash)||(!parseFloat(cash))){
@@ -141,21 +149,21 @@ Till.prototype.createRectHeader = function(){
     console.log("Enter a cash received amount first.");
     return 0;
   }
-  var receiptComps = {};
-  receiptComps["dateTime"] = createDateTime();
-  receiptComps["name"] = this.shopName;
-  receiptComps["address"] = this.address;
-  receiptComps["phone"] = this.phone;
-  receiptComps["purchs"] = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH,"purchsListForReceipt");
-  receiptComps["grossTotal"] = align(this.spendAmtBeforeDiscount, this.INVOICEITEMCHARLENGTH, "Total");
+  // var receiptComps = {};
+  this.receiptComps["dateTime"] = createDateTime();
+  this.receiptComps["name"] = this.shopName;
+  this.receiptComps["address"] = this.address;
+  this.receiptComps["phone"] = this.phone;
+  this.receiptComps["purchs"] = createPurchList(this.basket,this.prices, this.INVOICEITEMCHARLENGTH,"purchsListForReceipt");
+  this.receiptComps["grossTotal"] = align(this.spendAmtBeforeDiscount, this.INVOICEITEMCHARLENGTH, "Total");
   if (this.genDiscAmt>0){
-    receiptComps["basicDiscount"] = align(this.genDiscAmt, this.INVOICEITEMCHARLENGTH, `General ${this.discounts["general"]}% discount`);
+    this.receiptComps["basicDiscount"] = align(this.genDiscAmt, this.INVOICEITEMCHARLENGTH, `General ${this.discounts["general"]}% discount`);
   }
-  receiptComps["totalTax"] = align(this.totalTax, this.INVOICEITEMCHARLENGTH, `Tax at ${this.taxPercent}%`);
-  receiptComps["grandTotal"] = align(this.totalOwed, this.INVOICEITEMCHARLENGTH, "Total:");
-  receiptComps["cash"] = align(this.cashTendered, this.INVOICEITEMCHARLENGTH, "Cash:");
-  receiptComps["change"] = align(this.changeOwed, this.INVOICEITEMCHARLENGTH, "Change:");
-  return receiptComps;
+  this.receiptComps["totalTax"] = align(this.totalTax, this.INVOICEITEMCHARLENGTH, `Tax at ${this.taxPercent}%`);
+  this.receiptComps["grandTotal"] = align(this.totalOwed, this.INVOICEITEMCHARLENGTH, "Total:");
+  this.receiptComps["cash"] = align(this.cashTendered, this.INVOICEITEMCHARLENGTH, "Cash:");
+  this.receiptComps["change"] = align(this.changeOwed, this.INVOICEITEMCHARLENGTH, "Change:");
+  return this.receiptComps;
 }
 
 Till.prototype.createInterimPurchList = function(){

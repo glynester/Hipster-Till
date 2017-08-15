@@ -25,6 +25,15 @@ body {
     background-color: yellow;
   }
 
+  #messageContainer {
+    height: 30px;
+  }
+
+  #app {
+    text-align:left;
+    display: inline-block;
+  }
+
   #appContainer {
   border: 1px solid black;
   width: 500px;
