@@ -9,6 +9,7 @@ $(document).ready(function(){
     }
     $('#messages').hide();
     $('#btnGenRecpt').attr("disabled",true);
+    $('#btnAddCash').attr("disabled",true);
   }
 
 
@@ -41,6 +42,8 @@ $(document).ready(function(){
     $('#menuItems').val('');
     $('#cashReceived').val("£0.00");
     $('#changeDue').val("£0.00");
+    $('#btnGenRecpt').attr("disabled",true);
+    $('#btnAddCash').attr("disabled",true);
   }
 
   $('#btnAddItem').click(function(){
@@ -56,12 +59,14 @@ $(document).ready(function(){
     till.calcBasicTotal();
     till.calcBasicDiscount();
     showMessage();
+    if (till.anyItemsOrdered()){
+      $('#btnAddCash').attr("disabled",false);
+    }
     if (till.message[0]==""){
       $('#menuItems').val('');
       $('#quantity').val("");
     }
     $('#amtOwed').text(`£${(parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt)).toFixed(2)}`);
-
     $('#receipt').empty();
     var items = till.createInterimPurchList();
     $('#receipt').css({'width':`${till.CURRENTPURCHLISTWIDTH}px`});
