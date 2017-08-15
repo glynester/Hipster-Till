@@ -39,6 +39,7 @@ $(document).ready(function(){
     $('#quantity').val("");
     $('#amtOwed').val("£0.00");
     $('#menuItems').val('');
+    $('#cashReceived').val("£0.00");
   }
 
   $('#btnAddItem').click(function(){
@@ -94,6 +95,7 @@ $(document).ready(function(){
     showMessage();
     if (till.cashTendered != 0){
       $('#btnGenRecpt').attr("disabled",false);
+      $('#cashReceived').val(`£${till.cashTendered}`);
     }
   })
 

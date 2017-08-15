@@ -52,7 +52,7 @@ body {
     width: 230px;
   }
 
-  #amtOwed {
+  output {
     background-color: white;
     border: 1px red solid;
     padding: 5px;
