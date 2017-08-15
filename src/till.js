@@ -132,7 +132,15 @@ Till.prototype.createRectHeader = function(){
   this.calcTaxation();
   this.finalTotal();
   this.calcCashOwed();
-  // if(till.cashTendered==0)return false;
+  if (this.basket.length == 0){
+    this.message = ["No items have been added yet.",1];
+    console.log("No items have been added yet.");
+    return 0;
+  } else if (parseFloat(till.cashTendered) == 0){
+    this.message = ["Enter a cash received amount first.",1];
+    console.log("Enter a cash received amount first.");
+    return 0;
+  }
   var receiptComps = {};
   receiptComps["dateTime"] = createDateTime();
   receiptComps["name"] = this.shopName;

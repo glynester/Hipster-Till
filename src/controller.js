@@ -32,19 +32,17 @@ $(document).ready(function(){
     till.reset();
     $('#messages').hide();
     $('#receipt').empty();
-    $('#receipt').css({'padding':'0px'});    // Need to set programmatically or receipt padding will be visible.
+    $('#receipt').css({'padding':'0px'});         // Need to set programmatically or receipt padding will be visible.
     $('#cash').val("");
     $('#quantity').val("");
     $('#amtOwed').val("£0.00");
-    // $('#menuItems').removeAttr("selected");
     $('#menuItems').val('');
-    // $("#menuItems option:first").attr("selected", true);
   }
 
   $('#btnAddItem').click(function(){
     var item = $('#menuItems option:selected').val();
     var qty = $('#quantity').val();
-    till.cashTendered = 0;                  //Allows more items to be added by resetting the cash amount received to zero.
+    till.cashTendered = 0;                        //Allows more items to be added by resetting the cash amount received to zero.
     $('#cash').val("");
     till.addItem(item,qty);
     till.calcBasicTotal();
@@ -65,12 +63,8 @@ $(document).ready(function(){
   })
 
   $('#btnGenRecpt').click(function(){
-    if (parseInt(till.cashTendered)>parseInt(till.totalOwed)){
-      createRect();
-    } else {
-      this.message = ["Enter a cash received amount first.",1];
-      console.log("Enter a cash received amount first.");
-    }
+    createRect();
+    showMessage();
   })
 
   function createRect(){
@@ -78,7 +72,7 @@ $(document).ready(function(){
     if (!recItems) return false;
     $('#receipt').empty();
     $('#receipt').css({'width':`${till.RECEIPTWIDTH}px`});
-    $('#receipt').css({'padding':'10px'});    // Need to set programmatically or receipt padding will be visible.
+    $('#receipt').css({'padding':'10px'});        // Need to set programmatically or receipt padding will be visible.
     $('#receipt').append($("<img>").attr("src","images/cup.png"));
     for (var v in recItems){
       if (v=="purchs"){
