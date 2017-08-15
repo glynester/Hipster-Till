@@ -4,7 +4,7 @@ Cash till simulation for a coffee shop using data supplied as a json file (see j
 # Full Requirement
 See "Till tech test" below:
 
-## Technology
+# Technology
 Built using javacript and jquery following a MVC pattern.  
 A javacript development framework was not used.  
 Used TTD and tests were written using Jasmine.  
@@ -35,11 +35,10 @@ Click the "Cash Received" button to enter the cash received.
 Click the "Generate Receipt" button to display the receipt.  
 Once the receipt has been generated, further items can be added or the amount of cash received can be changed.  
 
-NOTES
+NOTES  
 The system will prevent invalid entries from being made.  
 Buttons are only active when it is appropriate to click them in the process. Before that they are disabled.
 Any error message will display at the top.  
-
 
 ---
 ---
@@ -88,6 +87,9 @@ Version 3
 Implement a user interface that can actually be used as a till.
 
 You may use whatever technologies you see fit.
+
+---
+---
 
 APPENDIX 1
 ----------
