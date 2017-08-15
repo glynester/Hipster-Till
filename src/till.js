@@ -105,19 +105,18 @@ Till.prototype.finalTotal = function(){
 }
 
 Till.prototype.tenderCash = function(cash){
-  this.createRectHeader();          // Need to update final amount owed to calculate if cash is sufficient.
-  if (!this.anyItemsOrdered()){
+  // this.createRectHeader();          // Need to update final amount owed to calculate if cash is sufficient.
+  if (this.basket.length == 0){
     this.message = ["No items have been added yet.",1];
     console.log("No items have been added yet.");
-    return false;
+    return 0;
   }
-  if ((!cash)||(!parseFloat(cash))){
+  if (!cash){           
     this.message = ["No cash amount has been entered.",1];
     console.log("No cash amount has been entered.");
     return false;
   }
-
-  if (cash<parseFloat(this.totalOwed)){
+  if (cash<(parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt))){
     this.message = ["You have not entered enough cash.",1];
     console.log("You have not entered enough cash.");
     return false;
@@ -140,15 +139,15 @@ Till.prototype.createRectHeader = function(){
   this.calcTaxation();
   this.finalTotal();
   this.calcCashOwed();
-  if (this.basket.length == 0){
-    this.message = ["No items have been added yet.",1];
-    console.log("No items have been added yet.");
-    return 0;
-  } else if (parseFloat(till.cashTendered) == 0){
-    this.message = ["Enter a cash received amount first.",1];
-    console.log("Enter a cash received amount first.");
-    return 0;
-  }
+  // if (this.basket.length == 0){
+  //   this.message = ["No items have been added yet.",1];
+  //   console.log("No items have been added yet.");
+  //   return 0;
+  // } else if (parseFloat(till.cashTendered) == 0){
+  //   this.message = ["Enter a cash received amount first.",1];
+  //   console.log("Enter a cash received amount first.");
+  //   return 0;
+  // }
   // var receiptComps = {};
   this.receiptComps["dateTime"] = createDateTime();
   this.receiptComps["name"] = this.shopName;
