@@ -1,14 +1,18 @@
 # Hipster-Till
 Cash till simulation for a coffee shop using data supplied as a json file (see json format in Appendix 1)
 
+# Full Requirement
+See "Till tech test" below:
+
 ## Technology
 Built using javacript and jquery following a MVC pattern.  
 A javacript development framework was not used.  
 Used TTD and tests were written using Jasmine.  
 
+# Using the Program
 ## Without web interface
 Load index.html into a browser.  
-In the console, type the following:
+In the developer console, type the following:
 ```
 var till = new Till("./files/hipstercoffee.json");               // Not yet working  
 var till = new Till();  
@@ -19,7 +23,8 @@ till.tenderCash(100);
 console.log(till.createRectHeader());   // Creates an object containing all receipt elements.  
 console.log(till.changeOwed);  
 ```
-## With web interface
+## With web interface  
+Load index.html into a browser.
 Click on the dropdown list next to the "Add Item" button.  
 Enter a quantity in the box to the right of that.  
 Click the "Add Item" button to add the item as a purchase.  
@@ -34,9 +39,10 @@ NOTES
 The system will prevent invalid entries from being made.  
 Buttons are only active when it is appropriate to click them in the process. Before that they are disabled.
 Any error message will display at the top.  
-Once the receipt has been generated, further items can be added or the amount of cash received can be changed.  
 
 
+---
+---
 
 Till tech test
 ==============
