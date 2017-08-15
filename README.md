@@ -42,9 +42,9 @@ Any error message will display at the top.
 
 
 # Running a webserver in UBUNTU
-In terminal, navigate to the folder your files are in, e.g. "/course_projects/Hipster-Till"
-Type the following command to run a server "sudo python2 -m SimpleHTTPServer 80" or "sudo python3 -m http.server 80".
-Type localhost into a Chrome browser to open the website on the server.
+In terminal, navigate to the folder your files are in, e.g. "/course_projects/Hipster-Till".  
+Type the following command to run a server "sudo python2 -m SimpleHTTPServer 80" or "sudo python3 -m http.server 80".  
+Type localhost into a Chrome browser to open the website on the server.  
 
 ---
 ---
