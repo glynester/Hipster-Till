@@ -56,22 +56,18 @@ Till.prototype.reset = function(){
 Till.prototype.addItem = function(item,number){
   if (!item) {
     this.message = ["You have not entered an item to add.",1];
-    console.log("You have not entered an item to add.")
     return false;
   }
   if (!this.prices[item]) {
     this.message = ["That item does not exist.",1];
-    console.log("That item does not exist.")
     return false;
   }
   if (!parseInt(number)) {
     this.message = ["No quantity has been entered.",1];
-    console.log("No quantity has been entered.");
     return false;
   }
   if (parseFloat(number)!=parseInt(number)||parseInt(number)<=0) {
     this.message = ["An invalid quantity has been entered.",1];
-    console.log("An invalid quantity has been entered.");
     return false;
   }
   this.basket.push([item,parseInt(number)]);
@@ -105,20 +101,16 @@ Till.prototype.finalTotal = function(){
 }
 
 Till.prototype.tenderCash = function(cash){
-  // this.createRectHeader();          // Need to update final amount owed to calculate if cash is sufficient.
   if (this.basket.length == 0){
     this.message = ["No items have been added yet.",1];
-    console.log("No items have been added yet.");
-    return 0;
-  }
-  if (!cash){           
-    this.message = ["No cash amount has been entered.",1];
-    console.log("No cash amount has been entered.");
     return false;
   }
-  if (cash<(parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt))){
+  if ((!cash)||(isNaN(cash* 1))){
+    this.message = ["No cash amount has been entered.",1];
+    return false;
+  }
+  if (cash<(parseFloat(this.spendAmtBeforeDiscount)-parseFloat(this.genDiscAmt))){
     this.message = ["You have not entered enough cash.",1];
-    console.log("You have not entered enough cash.");
     return false;
   }
   this.cashTendered = (parseFloat(cash)).toFixed(2);
@@ -139,15 +131,13 @@ Till.prototype.createRectHeader = function(){
   this.calcTaxation();
   this.finalTotal();
   this.calcCashOwed();
-  // if (this.basket.length == 0){
-  //   this.message = ["No items have been added yet.",1];
-  //   console.log("No items have been added yet.");
-  //   return 0;
-  // } else if (parseFloat(till.cashTendered) == 0){
-  //   this.message = ["Enter a cash received amount first.",1];
-  //   console.log("Enter a cash received amount first.");
-  //   return 0;
-  // }
+  if (this.basket.length == 0){
+    this.message = ["No items have been added yet.",1];
+    return 0;
+  } else if (parseFloat(this.cashTendered) == 0){
+    this.message = ["Enter a cash received amount first.",1];
+    return 0;
+  }
   // var receiptComps = {};
   this.receiptComps["dateTime"] = createDateTime();
   this.receiptComps["name"] = this.shopName;

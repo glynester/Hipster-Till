@@ -76,13 +76,15 @@ describe ("till",function(){
   });
 
   it ("should not allow insufficient cash to be tendered",function(){
-    till.addItem("Choc Mousse",5);
+    till.addItem("Choc Mousse",15);
+    till.createRectHeader();
     till.tenderCash(10);
     expect(till.cashTendered).toEqual(0);
   });
 
   it ("should not allow an invalid cash entry to be made",function(){
     till.addItem("Choc Mousse",5);
+    till.createRectHeader();
     till.tenderCash("hello");
     expect(till.cashTendered).toEqual(0);
   });

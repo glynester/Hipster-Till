@@ -11,7 +11,7 @@ $(document).ready(function(){
   $('#messages').hide();
 
   function showMessage(){
-    console.log(till.message);
+    // console.log(till.message);
     if (till.message[1] == 1){
       $('#messages').text(till.message[0]);
       $('#messages').show();
