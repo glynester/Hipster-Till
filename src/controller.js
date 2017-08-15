@@ -40,13 +40,18 @@ $(document).ready(function(){
     $('#amtOwed').val("£0.00");
     $('#menuItems').val('');
     $('#cashReceived').val("£0.00");
+    $('#changeDue').val("£0.00");
   }
 
   $('#btnAddItem').click(function(){
     var item = $('#menuItems option:selected').val();
     var qty = $('#quantity').val();
     till.cashTendered = 0;                        //Allows more items to be added by resetting the cash amount received to zero.
+    $('#btnGenRecpt').attr("disabled",true);
     $('#cash').val("");
+    $('#cashReceived').val(`£${(till.cashTendered).toFixed(2)}`);
+    $('#changeDue').val(`£${(parseFloat(till.cashTendered) - parseFloat(till.totalOwed)).toFixed(2)}`);
+    $('#changeDue').val("£0.00");
     till.addItem(item,qty);
     till.calcBasicTotal();
     till.calcBasicDiscount();
@@ -96,6 +101,8 @@ $(document).ready(function(){
     if (till.cashTendered != 0){
       $('#btnGenRecpt').attr("disabled",false);
       $('#cashReceived').val(`£${till.cashTendered}`);
+      // $('#changeDue').val(`£${(parseFloat(till.cashTendered).toFixed(2))}`);
+      $('#changeDue').val(`£${(parseFloat(till.cashTendered) - (parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt))).toFixed(2)}`);
     }
   })
 

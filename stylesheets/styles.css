@@ -23,6 +23,8 @@ body {
   #messages {
     color: red;
     background-color: yellow;
+    padding: 2px;
+    padding-left: 5px;
   }
 
   #messageContainer {

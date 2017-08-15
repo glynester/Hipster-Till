@@ -125,7 +125,16 @@ Till.prototype.calcCashOwed = function(cash){
   this.changeOwed = (this.changeOwed).toFixed(2);
 }
 
+// function runUpdates(){
+//   this.calcBasicTotal();
+//   this.calcBasicDiscount();
+//   this.calcTaxation();
+//   this.finalTotal();
+//   this.calcCashOwed();
+// }
+
 Till.prototype.createRectHeader = function(){
+  // runUpdates()
   this.calcBasicTotal();
   this.calcBasicDiscount();
   this.calcTaxation();
