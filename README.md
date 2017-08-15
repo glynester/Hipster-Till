@@ -5,8 +5,8 @@ Cash till simulation for a coffee shop using data supplied as a json file (see j
 See "Till tech test" below:
 
 # Technology
-Built using javacript and jquery following a MVC pattern.  
-A javacript development framework was not used.  
+Built using Javacript and JQuery following a MVC pattern.  
+A Javacript development framework was not used.  
 Used TTD and tests were written using Jasmine.  
 
 # Using the Program
@@ -39,6 +39,12 @@ NOTES
 The system will prevent invalid entries from being made.  
 Buttons are only active when it is appropriate to click them in the process. Before that they are disabled.
 Any error message will display at the top.  
+
+
+# Running a webserver in UBUNTU
+In terminal, navigate to the folder your files are in, e.g. "/course_projects/Hipster-Till"
+Type the following command to run a server "sudo python2 -m SimpleHTTPServer 80" or "sudo python3 -m http.server 80".
+Type localhost into a Chrome browser to open the website on the server.
 
 ---
 ---

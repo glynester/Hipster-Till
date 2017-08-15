@@ -1,6 +1,8 @@
 $(document).ready(function(){
   till = new Till();
   initialise();
+  $('#appHeader').text(`${till.shopName}`)
+  $('title').text(`${till.shopName} Cash Till`)
   function initialise(){
     var menuObj = till.prices;
     var sel = $('#menuItems');
@@ -15,7 +17,6 @@ $(document).ready(function(){
 
 
   function showMessage(){
-    // console.log(till.message);
     if (till.message[1] == 1){
       $('#messages').text(till.message[0]);
       $('#messages').show();
@@ -24,7 +25,6 @@ $(document).ready(function(){
       $('#messages').text("");
       $('#messages').hide();
       till.message[0] = "";
-      // till.message[1] = 0;
     }
 }
 
@@ -109,7 +109,6 @@ $(document).ready(function(){
     if (till.cashTendered != 0){
       $('#btnGenRecpt').attr("disabled",false);
       $('#cashReceived').val(`£${till.cashTendered}`);
-      // $('#changeDue').val(`£${(parseFloat(till.cashTendered).toFixed(2))}`);
       $('#changeDue').val(`£${(parseFloat(till.cashTendered) - (parseFloat(till.spendAmtBeforeDiscount)-parseFloat(till.genDiscAmt))).toFixed(2)}`);
     }
   })

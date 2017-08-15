@@ -1,16 +1,34 @@
 'use strict'
 
-function Till(){
-  // var data = $.getJSON("/files/hipstercoffee.json")
-  // this.shop = mydata[0].shopName;
-  // console.log(data);
-  // console.log("XXXXXXXXXXXXXXXXXXXXXX");
-  // console.log(data[0]);
+function Till(source="/files/hipstercoffee.json"){
+// jquery-2.1.4.min.js:4 XMLHttpRequest cannot load file:///files/hipstercoffee.json.
+// Cross origin requests are only supported for protocol schemes: http, data, chrome,
+// chrome-extension, https, chrome-extension-resource.
 
-  // this.shopname = data[0]["shopName"]
-  // this.address = data[0]["address"]
-  // this.phone = data[0]["phone"]
-  // this.prices = data[0]["prices"]
+  // var data = $.getJSON(source);     // This works and returns the object hidden in "responseText".
+  // var data = $.ajax({type: "GET", url: source, async: false}).responseText; // This works and returns
+  // the object but I can't use the object because the data is received asynchronously???
+
+  var d = $.get(source);
+  d.done(function(data) {
+      // console.log(data);
+      // console.log(data[0].prices[0]);
+      this.shopname = data[0]["shopName"];
+      this.address = data[0]["address"];
+      this.phone = data[0]["phone"];
+      this.prices = data[0].prices[0];
+      console.log(this.shopname);
+      console.log(this.address);
+      console.log(this.phone);
+      console.log(this.prices);
+  });
+  // These don't display but inside the function they do.
+  // The code below is being run before the code in the function - see order of output in the console.
+  console.log(this.shopname);
+  console.log(this.address);
+  console.log(this.phone);
+  console.log(this.prices);
+  
   //++++++++++++++++++++++++++++++++++++++++
   // Remove when json file is working!
   this.shopName = "The Coffee Connection";
