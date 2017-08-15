@@ -7,8 +7,10 @@ $(document).ready(function(){
     for(var prop in menuObj){
       sel.append($("<option>").attr('value',prop).text(`${prop} (£${menuObj[prop].toFixed(2)})`));
     }
+    $('#messages').hide();
+    $('#btnGenRecpt').attr("disabled",true);
   }
-  $('#messages').hide();
+
 
   function showMessage(){
     // console.log(till.message);
@@ -90,6 +92,9 @@ $(document).ready(function(){
     var cash = $('#cash').val();
     till.tenderCash(cash);
     showMessage();
+    if (till.cashTendered != 0){
+      $('#btnGenRecpt').attr("disabled",false);
+    }
   })
 
 });
