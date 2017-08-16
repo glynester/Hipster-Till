@@ -1,4 +1,12 @@
 $(document).ready(function(){
+  checkLocation();
+  function checkLocation(){ // If file is not running on web server, redirect to a message page.
+    var href = location.href;
+    href=href.match(/([^\/]*)\/*$/)[1];
+    if ((window.location.protocol == 'file:')&&(href=="index.html")){
+      window.location.href = "NoServer.html";
+    }
+  }
   till = new Till();
   initialise();
   $('#appHeader').text(`${till.shopName}`)
@@ -26,6 +34,7 @@ $(document).ready(function(){
       $('#messages').hide();
       till.message[0] = "";
     }
+
 }
 
   $('#btnClearAll').click(function(){

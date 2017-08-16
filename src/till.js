@@ -4,10 +4,16 @@ function Till(source="/files/hipstercoffee.json"){
 
   var data = $.ajax({type: "GET", url: source, async: false}).responseText; // Synchronous call.
   data = JSON.parse(data);
+  if (!data[0]["shopName"]){
+
+  }
+
   this.shopName = data[0]["shopName"];
   this.address = data[0]["address"];
   this.phone = data[0]["phone"];
   this.prices = data[0]["prices"][0];
+
+
 
   //++++++++++++++++++++++++++++++++++++++++
   // HARDCODED VALUES.
@@ -17,6 +23,8 @@ function Till(source="/files/hipstercoffee.json"){
   // "jquery-2.1.4.min.js:4 XMLHttpRequest cannot load file:///files/hipstercoffee.json.
   // Cross origin requests are only supported for protocol schemes: http, data, chrome,
   // chrome-extension, https, chrome-extension-resource".
+  // You will also need to disable "checkLocation()" in till.js as this redirects the webpage
+  // if the website is not running on a webserver.
   // Uncomment these values if needed:
 
   // this.shopName = "The Coffee Connection";
@@ -28,6 +36,7 @@ function Till(source="/files/hipstercoffee.json"){
   //   "Blueberry Muffin": 4.05,  "Chocolate Chip Muffin": 4.05,  "Muffin Of The Day": 4.55};
 
   //++++++++++++++++++++++++++++++++++++++++
+
   this.discountTable = {};
   this.basket = [];
   this.receiptComps = {};
