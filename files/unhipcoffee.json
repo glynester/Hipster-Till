@@ -1,0 +1,26 @@
+[
+  {
+    "shopName": "Unhip Coffee",
+    "address": "123 Bluewater Way",
+    "phone": "+1(652)412-8519",
+    "prices": [
+      {
+        "Cafe Latte": 2.75,
+        "Flat White": 2.75,
+        "Cappucino": 1.85,
+        "Single Espresso": 1.05,
+        "Double Espresso": 2.75,
+        "Americano": 2.75,
+        "Cortado": 2.55,
+        "Tea": 1.65,
+        "Choc Mudcake": 3.40,
+        "Choc Mousse": 4.20,
+        "Affogato": 5.80,
+        "Tiramisu": 5.40,
+        "Blueberry Muffin": 3.05,
+        "Chocolate Chip Muffin": 3.05,
+        "Muffin Of The Day": 3.55
+      }
+    ]
+  }
+]

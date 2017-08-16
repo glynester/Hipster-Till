@@ -1,43 +1,32 @@
 'use strict'
 
 function Till(source="/files/hipstercoffee.json"){
-// jquery-2.1.4.min.js:4 XMLHttpRequest cannot load file:///files/hipstercoffee.json.
-// Cross origin requests are only supported for protocol schemes: http, data, chrome,
-// chrome-extension, https, chrome-extension-resource.
 
-  // var data = $.getJSON(source);     // This works and returns the object hidden in "responseText".
-  // var data = $.ajax({type: "GET", url: source, async: false}).responseText; // This works and returns
-  // the object but I can't use the object because the data is received asynchronously???
+  var data = $.ajax({type: "GET", url: source, async: false}).responseText; // Synchronous call.
+  data = JSON.parse(data);
+  this.shopName = data[0]["shopName"];
+  this.address = data[0]["address"];
+  this.phone = data[0]["phone"];
+  this.prices = data[0]["prices"][0];
 
-  var d = $.get(source);
-  d.done(function(data) {
-      // console.log(data);
-      // console.log(data[0].prices[0]);
-      this.shopname = data[0]["shopName"];
-      this.address = data[0]["address"];
-      this.phone = data[0]["phone"];
-      this.prices = data[0].prices[0];
-      console.log(this.shopname);
-      console.log(this.address);
-      console.log(this.phone);
-      console.log(this.prices);
-  });
-  // These don't display but inside the function they do.
-  // The code below is being run before the code in the function - see order of output in the console.
-  console.log(this.shopname);
-  console.log(this.address);
-  console.log(this.phone);
-  console.log(this.prices);
-  
   //++++++++++++++++++++++++++++++++++++++++
-  // Remove when json file is working!
-  this.shopName = "The Coffee Connection";
-  this.address = "123 Lakeside Way";
-  this.phone = "+1(650)360-0708";
-  this.prices = {"Cafe Latte": 4.75, "Flat White": 4.75,  "Cappucino": 3.85,  "Single Espresso": 2.05,
-    "Double Espresso": 3.75,  "Americano": 3.75,  "Cortado": 4.55,  "Tea": 3.65,
-    "Choc Mudcake": 6.40,  "Choc Mousse": 8.20,  "Affogato": 14.80,  "Tiramisu": 11.40,
-    "Blueberry Muffin": 4.05,  "Chocolate Chip Muffin": 4.05,  "Muffin Of The Day": 4.55};
+  // HARDCODED VALUES.
+  // You can use the hard coded values below if you do not run the website from a server.
+  // You will not be able to access the JSON file if running the website from a local file system
+  // (and not a server). You will get the following error if running the website from a local file system :
+  // "jquery-2.1.4.min.js:4 XMLHttpRequest cannot load file:///files/hipstercoffee.json.
+  // Cross origin requests are only supported for protocol schemes: http, data, chrome,
+  // chrome-extension, https, chrome-extension-resource".
+  // Uncomment these values if needed:
+
+  // this.shopName = "The Coffee Connection";
+  // this.address = "123 Lakeside Way";
+  // this.phone = "+1(650)360-0708";
+  // this.prices = {"Cafe Latte": 4.75, "Flat White": 4.75,  "Cappucino": 3.85,  "Single Espresso": 2.05,
+  //   "Double Espresso": 3.75,  "Americano": 3.75,  "Cortado": 4.55,  "Tea": 3.65,
+  //   "Choc Mudcake": 6.40,  "Choc Mousse": 8.20,  "Affogato": 14.80,  "Tiramisu": 11.40,
+  //   "Blueberry Muffin": 4.05,  "Chocolate Chip Muffin": 4.05,  "Muffin Of The Day": 4.55};
+
   //++++++++++++++++++++++++++++++++++++++++
   this.discountTable = {};
   this.basket = [];
