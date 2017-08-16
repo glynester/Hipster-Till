@@ -5,8 +5,8 @@ Cash till simulation for a coffee shop using data supplied as a json file (see j
 See "Till tech test" below:
 
 # Technology
-Built using Javacript and JQuery following a MVC pattern.  
-A Javacript development framework was not used.  
+Built using Javascript and JQuery following a MVC pattern.  
+A Javascript development framework was not used.  
 Followed a TTD approach and tests were written using Jasmine.  
 
 # Using the Program
@@ -72,7 +72,7 @@ Load the SpecRunner.html file for the website into a browser on a server (see "R
 The test suite will automatically run.  
 
 # Running a webserver in UBUNTU
-If you try and run the website from a local file system you will get a "Cross origin request" error when you try and access the JSON file. This is because brower security is much tighter around JS methods associated with local files.   
+If you try and run the website from a local file system you will get a "Cross origin request" error when you try and access the JSON file. This is because browser security is much tighter around JS methods associated with local files.   
 To get round this, you need to run this website on a webserver.  
 
 To open a webserver in UBUNTU do the following:  
