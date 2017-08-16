@@ -7,25 +7,25 @@ See "Till tech test" below:
 # Technology
 Built using Javacript and JQuery following a MVC pattern.  
 A Javacript development framework was not used.  
-Used TTD and tests were written using Jasmine.  
+Followed a TTD approach and tests were written using Jasmine.  
 
 # Using the Program
 Clone the git repository onto your local system.  
 
-## Without web interface
-Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).
-Once index.html has opened in a browser, open up a developer console.
+## 1) Without web interface
+Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).  
+Once index.html has opened in a browser, open up a developer console.  
 In the developer console, type the following:
 
 **Create the till:**  
 ```
 var till = new Till();  // Will default to using the file "hipstercoffee.json" in the files folder.  
 ```
-**Or use the second sample file (specify the 2nd non default JSON file in the files folder):**  
+Or use the second sample file (specify the 2nd non default JSON file in the files folder):    
 ```
 var till = new Till("./files/unhipcoffee.json");  
 ```
-**Or load your own json file from another location:**  
+Or load your own json file from another location:    
 ```
 var till = new Till("./location/yourfilename");  
 ```
@@ -43,13 +43,13 @@ till.tenderCash(100);
 ```
 console.log(till.createRectHeader());   // Creates an object containing all receipt elements.  
 ```
-**Show how much change is due:**  
+**Calculate how much change is due:**  
 ```
 console.log(till.changeOwed);  
 ```
-## With web interface  
+## 2) With web interface  
 An error page "NoServer.html" will display if you try and load the website on a local file system and not on a web server.  
-Load the index.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/index.html or just http://localhost  
+Load the index.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/index.html or just http://localhost into the address bar when the server is running.    
 This will open up the Till app website.
 Click on the dropdown list next to the "Add Item" button.  
 Enter a quantity in the box to the right of that.  
@@ -68,7 +68,7 @@ Any error message will display at the top.
 
 # Running the Test Suite
 The tests are written using the Jasmine test suite.  
-Load the SpecRunner.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/SpecRunner.html  
+Load the SpecRunner.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/SpecRunner.html into the address bar when the server is running.      
 The test suite will automatically run.  
 
 # Running a webserver in UBUNTU
@@ -78,7 +78,7 @@ To get round this, you need to run this website on a webserver.
 To open a webserver in UBUNTU do the following:  
 In terminal, navigate to the folder your files are in, e.g. "/course_projects/Hipster-Till".  
 Type the following command to run a server "sudo python2 -m SimpleHTTPServer 80" or "sudo python3 -m http.server 80".  
-Type localhost into a Chrome browser to open the website on the server.  
+Type "localhost" into a Chrome browser to open the website on the server.  
 The website functionality should now work correctly.  
 
 ---
