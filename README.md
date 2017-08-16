@@ -18,7 +18,7 @@ In the developer console, type the following:
 ```
 var till = new Till();  // Will default to using the file "hipstercoffee.json" in the files folder.  
 ```
-**Or use the second sample file (pecify non default JSON file in the files folder):**  
+**Or use the second sample file (specify the 2nd non default JSON file in the files folder):**  
 ```
 var till = new Till("./files/unhipcoffee.json");  
 ```
@@ -56,15 +56,16 @@ Click the "Cash Received" button to enter the cash received.
 Click the "Generate Receipt" button to display the receipt.  
 Once the receipt has been generated, further items can be added or the amount of cash received can be changed.  
 
-NOTES  
+**NOTES**  
 The system will prevent invalid entries from being made.  
-Buttons are only active when it is appropriate to click them in the process. Before that they are disabled.
+Buttons are only active when it is appropriate to click them in the process. Before that they are disabled.  
 Any error message will display at the top.  
 
 
 # Running a webserver in UBUNTU
 If you try and run the website from a local file system you will get a "Cross origin request" error when you try and access the JSON file. This is because brower security is much tighter around JS methods associated with local files.   
 To get round this, you need to run this website on a webserver.  
+
 To open a webserver in UBUNTU do the following:  
 In terminal, navigate to the folder your files are in, e.g. "/course_projects/Hipster-Till".  
 Type the following command to run a server "sudo python2 -m SimpleHTTPServer 80" or "sudo python3 -m http.server 80".  
