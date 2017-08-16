@@ -5,21 +5,21 @@
     "phone": "+1(652)412-8519",
     "prices": [
       {
-        "Cafe Latte": 2.75,
-        "Flat White": 2.75,
-        "Cappucino": 1.85,
-        "Single Espresso": 1.05,
-        "Double Espresso": 2.75,
-        "Americano": 2.75,
-        "Cortado": 2.55,
-        "Tea": 1.65,
-        "Choc Mudcake": 3.40,
-        "Choc Mousse": 4.20,
-        "Affogato": 5.80,
-        "Tiramisu": 5.40,
-        "Blueberry Muffin": 3.05,
-        "Chocolate Chip Muffin": 3.05,
-        "Muffin Of The Day": 3.55
+        "Cafe Latte": 2.25,
+        "Flat White": 2.25,
+        "Cappucino": 1.55,
+        "Single Espresso": 1.55,
+        "Double Espresso": 2.65,
+        "Americano": 2.65,
+        "Cortado": 2.75,
+        "Tea": 1.45,
+        "Choc Mudcake": 3.20,
+        "Choc Mousse": 4.10,
+        "Affogato": 5.30,
+        "Tiramisu": 5.20,
+        "Blueberry Muffin": 3.25,
+        "Chocolate Chip Muffin": 3.25,
+        "Muffin Of The Day": 3.15
       }
     ]
   }

@@ -4,16 +4,10 @@ function Till(source="/files/hipstercoffee.json"){
 
   var data = $.ajax({type: "GET", url: source, async: false}).responseText; // Synchronous call.
   data = JSON.parse(data);
-  if (!data[0]["shopName"]){
-
-  }
-
   this.shopName = data[0]["shopName"];
   this.address = data[0]["address"];
   this.phone = data[0]["phone"];
   this.prices = data[0]["prices"][0];
-
-
 
   //++++++++++++++++++++++++++++++++++++++++
   // HARDCODED VALUES.

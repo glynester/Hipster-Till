@@ -2,7 +2,7 @@ describe ("till",function(){
   var till;
 
   beforeEach(function(){
-    till = new Till();    // Change this when json problem is resolved!
+    till = new Till();    
   });
 
   it ("should initialise properly", function(){
