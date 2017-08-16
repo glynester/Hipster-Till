@@ -10,8 +10,11 @@ A Javacript development framework was not used.
 Used TTD and tests were written using Jasmine.  
 
 # Using the Program
+Clone the git repository onto your local system.  
+
 ## Without web interface
-Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).  
+Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).
+Once index.html has opened in a browser, open up a developer console.
 In the developer console, type the following:
 
 **Create the till:**  
@@ -45,7 +48,9 @@ console.log(till.createRectHeader());   // Creates an object containing all rece
 console.log(till.changeOwed);  
 ```
 ## With web interface  
-Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).  
+An error page "NoServer.html" will display if you try and load the website on a local file system and not on a web server.  
+Load the index.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/index.html or just http://localhost  
+This will open up the Till app website.
 Click on the dropdown list next to the "Add Item" button.  
 Enter a quantity in the box to the right of that.  
 Click the "Add Item" button to add the item as a purchase.  
@@ -61,6 +66,10 @@ The system will prevent invalid entries from being made.
 Buttons are only active when it is appropriate to click them in the process. Before that they are disabled.  
 Any error message will display at the top.  
 
+# Running the Test Suite
+The tests are written using the Jasmine test suite.  
+Load the SpecRunner.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/SpecRunner.html  
+The test suite will automatically run.  
 
 # Running a webserver in UBUNTU
 If you try and run the website from a local file system you will get a "Cross origin request" error when you try and access the JSON file. This is because brower security is much tighter around JS methods associated with local files.   

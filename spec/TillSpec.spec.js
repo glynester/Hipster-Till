@@ -1,8 +1,10 @@
+// NOTE: Needs to be run on a server or you will get a "Cross origin requests" error.
+
 describe ("till",function(){
   var till;
 
   beforeEach(function(){
-    till = new Till();    
+    till = new Till();
   });
 
   it ("should initialise properly", function(){
