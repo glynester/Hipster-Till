@@ -50,7 +50,7 @@ console.log(till.changeOwed);
 ## 2) With web interface  
 An error page "NoServer.html" will display if you try and load the website on a local file system and not on a web server.  
 Load the index.html file for the website into a browser on a server (see "Running a webserver in UBUNTU" below) by entering http://localhost/index.html or just http://localhost into the address bar when the server is running.    
-This will open up the Till app website.
+This will open up the Till app website.  
 Click on the dropdown list next to the "Add Item" button.  
 Enter a quantity in the box to the right of that.  
 Click the "Add Item" button to add the item as a purchase.  
