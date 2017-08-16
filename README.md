@@ -14,21 +14,21 @@ Used TTD and tests were written using Jasmine.
 Load index.html into a browser on a server (see "Running a webserver in UBUNTU" below).  
 In the developer console, type the following:
 ```
-Create the till:  
+**Create the till:**  
 var till = new Till();  // Will default to using the file "hipstercoffee.json" in the files folder.  
-or use the second sample file:  
-var till = new Till("./files/unhipcoffee.json");       // Specify non default JSON file in the files folder.
-or load a json file from another location:  
-var till = new Till("./location/yourfilename");       // Specify another JSON file you have uploaded to another location.  
-Add an item:  
+**Or use the second sample file (pecify non default JSON file in the files folder):**  
+var till = new Till("./files/unhipcoffee.json");  
+**Or load your own json file from another location:**  
+var till = new Till("./location/yourfilename");  
+**Add an item:**  
 till.addItem("Blueberry Muffin",6);  
 till.addItem("Tea",4);  
 till.addItem("Affogato",2);  
-Receive cash:  
+**Receive cash:**  
 till.tenderCash(100);  
-Create the receipt:  
+**Create the receipt:**  
 console.log(till.createRectHeader());   // Creates an object containing all receipt elements.  
-Show how much change is due:  
+**Show how much change is due:**  
 console.log(till.changeOwed);  
 ```
 ## With web interface  
