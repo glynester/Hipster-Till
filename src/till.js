@@ -1,6 +1,6 @@
 'use strict'
 
-function Till(source="/files/hipstercoffee.json"){
+function Till(source="./files/hipstercoffee.json"){
 
   var data = $.ajax({type: "GET", url: source, async: false}).responseText; // Synchronous call.
   data = JSON.parse(data);
